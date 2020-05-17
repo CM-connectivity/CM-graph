@@ -32,7 +32,7 @@ release = '0.1'
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath('../../cmgraph'))
+sys.path.insert(0, os.path.abspath('../..'))
 
 # -- General configuration ---------------------------------------------------
 
@@ -45,6 +45,7 @@ sys.path.insert(0, os.path.abspath('../../cmgraph'))
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'numpydoc',
     'sphinx.ext.coverage',
     'sphinx.ext.imgmath',
     'sphinx.ext.viewcode',

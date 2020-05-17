@@ -1,26 +1,33 @@
-# from IPython.core.debugger import set_trace
+"""
+prep
+==============
+
+A module for io and preprocessing
+
+"""
 
 def emg_io(emg_fName, skiprows, sep = ' ', emg_chs_selected='all'):
     
     """
     this function takes .txt format emg file and renders to a pandas dataframe for further processing.
+    
     Parameters
-    ---------
-    emg_fName: string
+    -----------
+    emg_fName : string
         emg_fName should be in .txt or in .csv form. 
     emg_chs_selected : list of int
         the index of emg channels (columns) that are supposed to be used in further analysis, defaults to 'all'
-    sep: string
+    sep : string
         the seperator to be specified when reading the txt file with pandas.read_csv
-    skiprows: int
+    skiprows : int
         rows to be skipped. This applies for data containing emg information at the begining of the data file.
     
     Returns
     -------
-    pandas's dataframe
+    pandas's dataframe 
     
     Examples
-    -------
+    --------
     >>>emg_fName = r'D:\Data\RuiJinFirstStroke11Jan\EMG\subj1_healthy_session1.txt'
     >>>emg_io(emg_fName, skiprows = 3, emg_chs_selected='all')
 
@@ -29,10 +36,10 @@ def emg_io(emg_fName, skiprows, sep = ' ', emg_chs_selected='all'):
 
     Warnings
     --------
-    Note
+    
+    Notes
     --------
-    The .txt file or .csv file should not have headers. If so, please use skiprow to trim them. The first column should 
-    be 0 in the emg_chs_selected parameter
+    The .txt file or .csv file should not have headers. If so, please use skiprow to trim them. The first column should be 0 in the emg_chs_selected parameter
     """
     import pandas as pd  
     emg_data = pd.read_csv(emg_fName, header = None, skiprows=skiprows, sep = sep, engine = 'python')
@@ -46,23 +53,22 @@ def eeg_emg_alignment(eeg_fName, emg_df, sfreq_final, emg_freq, report_fName = N
                        montage = 'standard_1020'):
     """
     this function takes .set format for eeg and txt format for emg.
+    
     Parameters
-    ---------
-    eeg_fName: string 
+    -----------
+    eeg_fName : string 
         eeg_fName should be in .set form
-    emg_fName: string
+    emg_fName : string
         emg_fName should be in .txt form
     report_fName: string
-        optional, default to None which will not generate a report for the preprocessing result.
-        When reproty_fName is specified, two reports will be generated at the suggested directory including one in HTML,
+        optional, default to None which will not generate a report for the reprocessing result. When reproty_fName is specified, two reports will be generated at the suggested directory including one in HTML,
         and one in .h5 format. The .h5 format is an edittable report.
     montage: string
         The defaut montage is set to standard 1020 montage
     start_marker : boolean
         if start_marker is true, the segment before the first marker will be cropped, defaults to True
     fir: list
-        the lower and upper boundary of filter. If the boundary is set to None, then the filter become high-pass or 
-        low-pass filter.
+        the lower and upper boundary of filter. If the boundary is set to None, then the filter become high-pass or low-pass filter.
     PREP: boolean
         the EEG preprocessing pipeline process, defauts to True. It can de deactivated when set to false.
     emg_chs_selected : list of int
@@ -73,7 +79,7 @@ def eeg_emg_alignment(eeg_fName, emg_df, sfreq_final, emg_freq, report_fName = N
     mne raw object containing aligned eeg and emg data
     
     Examples
-    -------
+    --------
     >>>eeg_fName = r'D:\Data\RuiJinFirstStroke11Jan\EEG\subj1_healthy_session1.set'
     >>>emg_fName = r'D:\Data\RuiJinFirstStroke11Jan\EMG\subj1_healthy_session1.txt'
     >>>emg_df = pd.read_csv(emg_fName, header = None, skiprows=3,
@@ -85,7 +91,8 @@ def eeg_emg_alignment(eeg_fName, emg_df, sfreq_final, emg_freq, report_fName = N
 
     Warnings
     --------
-    Note
+    
+    Notes
     --------
     Make sure the eeg recording are no less than the emg recording. The current version of this function crop emg signal
     with respect to emg in order to keep these data aligned.
@@ -157,8 +164,9 @@ def epochs_basedon_emg(raw_hybrid, ref_emg, windowLen, step=100, threshold =0.5,
                        flat_criteria = dict(eeg=5e-7),tmin = 0.0, tmax = 3.0, save_fName=None):
     """
     this function takes .set format for eeg and txt format for emg.
+    
     Parameters
-    ---------
+    -----------
     raw_hybrid: mne raw object 
         The raw object containing aligned eeg and emg
     ref_emg: list of string 
@@ -193,7 +201,7 @@ def epochs_basedon_emg(raw_hybrid, ref_emg, windowLen, step=100, threshold =0.5,
     -------
     
     Examples
-    -------
+    ---------
     
     See Also
     --------
@@ -201,7 +209,8 @@ def epochs_basedon_emg(raw_hybrid, ref_emg, windowLen, step=100, threshold =0.5,
 
     Warnings
     --------
-    Note
+    
+    Notes
     --------
 
     """
@@ -242,7 +251,7 @@ def firstOnsetD(possibleOnsets):
     qn auxilary function that identify true movement onsets for all the possible onsets 
     dentified based on energy threshold
     Parameters
-    ---------
+    ----------
     possibleOnsets: list
         list of all the possible onsets
     
@@ -251,7 +260,7 @@ def firstOnsetD(possibleOnsets):
     true movement onsets
     
     Examples
-    -------
+    ---------
     
     See Also
     --------
@@ -259,7 +268,8 @@ def firstOnsetD(possibleOnsets):
 
     Warnings
     --------
-    Note
+    
+    Notes
     --------
 
     """
