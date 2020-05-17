@@ -28,6 +28,11 @@ version = ''
 # The full version, including alpha/beta/rc tags
 release = '0.1'
 
+# --path update----------------------------------------------------
+import os
+import sys
+
+sys.path.insert(0, os.path.abspath('../..'))
 
 # -- General configuration ---------------------------------------------------
 
@@ -40,6 +45,7 @@ release = '0.1'
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'numpydoc',
     'sphinx.ext.coverage',
     'sphinx.ext.imgmath',
     'sphinx.ext.viewcode',

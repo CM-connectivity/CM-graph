@@ -1,0 +1,391 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>cmgraph.prep &#8212; CM-graph 0.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for cmgraph.prep</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">prep</span>
+<span class="sd">==============</span>
+
+<span class="sd">A module for io and preprocessing</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="emg_io"><a class="viewcode-back" href="../../prep.html#cmgraph.prep.emg_io">[docs]</a><span class="k">def</span> <span class="nf">emg_io</span><span class="p">(</span><span class="n">emg_fName</span><span class="p">,</span> <span class="n">skiprows</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">emg_chs_selected</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">):</span>
+    
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    this function takes .txt format emg file and renders to a pandas dataframe for further processing.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    -----------</span>
+<span class="sd">    emg_fName : string</span>
+<span class="sd">        emg_fName should be in .txt or in .csv form. </span>
+<span class="sd">    emg_chs_selected : list of int</span>
+<span class="sd">        the index of emg channels (columns) that are supposed to be used in further analysis, defaults to &#39;all&#39;</span>
+<span class="sd">    sep : string</span>
+<span class="sd">        the seperator to be specified when reading the txt file with pandas.read_csv</span>
+<span class="sd">    skiprows : int</span>
+<span class="sd">        rows to be skipped. This applies for data containing emg information at the begining of the data file.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pandas&#39;s dataframe </span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt;emg_fName = r&#39;D:\Data\RuiJinFirstStroke11Jan\EMG\subj1_healthy_session1.txt&#39;</span>
+<span class="sd">    &gt;&gt;&gt;emg_io(emg_fName, skiprows = 3, emg_chs_selected=&#39;all&#39;)</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    Warnings</span>
+<span class="sd">    --------</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    --------</span>
+<span class="sd">    The .txt file or .csv file should not have headers. If so, please use skiprow to trim them. The first column should be 0 in the emg_chs_selected parameter</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>  
+    <span class="n">emg_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">emg_fName</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="n">skiprows</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="n">sep</span><span class="p">,</span> <span class="n">engine</span> <span class="o">=</span> <span class="s1">&#39;python&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">emg_chs_selected</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">emg_data</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">emg_data</span> <span class="o">=</span> <span class="n">emg_data</span><span class="p">[</span><span class="n">emg_chs_selected</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">emg_data</span></div>
+    
+<div class="viewcode-block" id="eeg_emg_alignment"><a class="viewcode-back" href="../../prep.html#cmgraph.prep.eeg_emg_alignment">[docs]</a><span class="k">def</span> <span class="nf">eeg_emg_alignment</span><span class="p">(</span><span class="n">eeg_fName</span><span class="p">,</span> <span class="n">emg_df</span><span class="p">,</span> <span class="n">sfreq_final</span><span class="p">,</span> <span class="n">emg_freq</span><span class="p">,</span> <span class="n">report_fName</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_marker</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">fir</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span> <span class="n">PREP</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">montage</span> <span class="o">=</span> <span class="s1">&#39;standard_1020&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    this function takes .set format for eeg and txt format for emg.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    -----------</span>
+<span class="sd">    eeg_fName : string </span>
+<span class="sd">        eeg_fName should be in .set form</span>
+<span class="sd">    emg_fName : string</span>
+<span class="sd">        emg_fName should be in .txt form</span>
+<span class="sd">    report_fName: string</span>
+<span class="sd">        optional, default to None which will not generate a report for the reprocessing result. When reproty_fName is specified, two reports will be generated at the suggested directory including one in HTML,</span>
+<span class="sd">        and one in .h5 format. The .h5 format is an edittable report.</span>
+<span class="sd">    montage: string</span>
+<span class="sd">        The defaut montage is set to standard 1020 montage</span>
+<span class="sd">    start_marker : boolean</span>
+<span class="sd">        if start_marker is true, the segment before the first marker will be cropped, defaults to True</span>
+<span class="sd">    fir: list</span>
+<span class="sd">        the lower and upper boundary of filter. If the boundary is set to None, then the filter become high-pass or low-pass filter.</span>
+<span class="sd">    PREP: boolean</span>
+<span class="sd">        the EEG preprocessing pipeline process, defauts to True. It can de deactivated when set to false.</span>
+<span class="sd">    emg_chs_selected : list of int</span>
+<span class="sd">        the index of emg channels (columns) that are supposed to be used in further analysis, defaults to &#39;all&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    mne raw object containing aligned eeg and emg data</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt;eeg_fName = r&#39;D:\Data\RuiJinFirstStroke11Jan\EEG\subj1_healthy_session1.set&#39;</span>
+<span class="sd">    &gt;&gt;&gt;emg_fName = r&#39;D:\Data\RuiJinFirstStroke11Jan\EMG\subj1_healthy_session1.txt&#39;</span>
+<span class="sd">    &gt;&gt;&gt;emg_df = pd.read_csv(emg_fName, header = None, skiprows=3,</span>
+<span class="sd">                               sep = &#39; &#39;,engine = &#39;python&#39;)</span>
+<span class="sd">    &gt;&gt;&gt;eeg_emg_alignment(eeg_fName,emg_df,emg_freq=1000,sfreq_final=500,report_fName=None,PREP=False)</span>
+<span class="sd">    </span>
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    Warnings</span>
+<span class="sd">    --------</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    --------</span>
+<span class="sd">    Make sure the eeg recording are no less than the emg recording. The current version of this function crop emg signal</span>
+<span class="sd">    with respect to emg in order to keep these data aligned.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">import</span> <span class="nn">mne</span><span class="o">,</span><span class="nn">os</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="n">raw_eeg</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_eeglab</span><span class="p">(</span><span class="n">eeg_fName</span><span class="p">)</span>
+    <span class="n">raw_eeg</span><span class="o">.</span><span class="n">set_montage</span><span class="p">(</span><span class="n">montage</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">start_marker</span><span class="o">==</span><span class="kc">True</span><span class="p">:</span>
+        <span class="n">eeg_onset</span><span class="o">=</span><span class="n">mne</span><span class="o">.</span><span class="n">events_from_annotations</span><span class="p">(</span><span class="n">raw_eeg</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">raw_eeg</span><span class="o">.</span><span class="n">crop</span><span class="p">(</span><span class="n">tmin</span> <span class="o">=</span> <span class="n">eeg_onset</span><span class="o">/</span><span class="n">raw_eeg</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;sfreq&quot;</span><span class="p">])</span>
+      
+    <span class="k">if</span> <span class="n">report_fName</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="c1">#### report raw properties ###</span>
+        <span class="n">report</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">Report</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">report_fname_editable</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">report_fName</span><span class="p">,</span><span class="s1">&#39;.h5&#39;</span><span class="p">)</span>
+        <span class="n">report_fname_2check</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">report_fName</span><span class="p">,</span><span class="s1">&#39;.html&#39;</span><span class="p">)</span>
+        <span class="n">fig_raw</span> <span class="o">=</span> <span class="n">raw_eeg</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scalings</span><span class="o">=</span><span class="mf">4e-5</span><span class="p">,</span><span class="n">n_channels</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span><span class="n">duration</span> <span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+        <span class="n">fig_raw_psd</span> <span class="o">=</span> <span class="n">raw_eeg</span><span class="o">.</span><span class="n">plot_psd</span><span class="p">()</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">add_figs_to_section</span><span class="p">(</span><span class="n">fig_raw</span><span class="p">,</span> <span class="n">captions</span><span class="o">=</span><span class="s1">&#39;raw_data&#39;</span><span class="p">,</span> <span class="n">section</span><span class="o">=</span><span class="s1">&#39;raw&#39;</span><span class="p">)</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">add_figs_to_section</span><span class="p">(</span><span class="n">fig_raw_psd</span><span class="p">,</span> <span class="n">captions</span><span class="o">=</span><span class="s1">&#39;raw_psd&#39;</span><span class="p">,</span> <span class="n">section</span><span class="o">=</span><span class="s1">&#39;raw&#39;</span><span class="p">)</span>
+    
+    <span class="n">raw_eeg</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">fir</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">h_freq</span><span class="o">=</span> <span class="n">fir</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">PREP</span> <span class="o">==</span><span class="kc">True</span><span class="p">:</span>
+    <span class="c1">#### prep steps, require pyprep        </span>
+        <span class="n">eeg_index</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">pick_types</span><span class="p">(</span><span class="n">raw_eeg</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">eeg</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">eog</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">meg</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">emg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">ch_names</span> <span class="o">=</span> <span class="n">raw_eeg</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;ch_names&quot;</span><span class="p">]</span>
+        <span class="n">ch_names_eeg</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ch_names</span><span class="p">)[</span><span class="n">eeg_index</span><span class="p">])</span>
+        <span class="n">sample_rate</span> <span class="o">=</span> <span class="n">raw_eeg</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;sfreq&quot;</span><span class="p">]</span>
+        <span class="n">montage_kind</span> <span class="o">=</span> <span class="s2">&quot;standard_1020&quot;</span>
+        <span class="n">montage</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">make_standard_montage</span><span class="p">(</span><span class="n">montage_kind</span><span class="p">)</span>
+        <span class="n">raw_eeg_copy</span><span class="o">=</span><span class="n">raw_eeg</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="c1"># Fit prep</span>
+        <span class="n">prep_params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ref_chs&#39;</span><span class="p">:</span> <span class="n">ch_names_eeg</span><span class="p">,</span>
+                       <span class="s1">&#39;reref_chs&#39;</span><span class="p">:</span> <span class="n">ch_names_eeg</span><span class="p">,</span>
+                       <span class="s1">&#39;line_freqs&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">sample_rate</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)}</span>
+        <span class="n">prep</span> <span class="o">=</span> <span class="n">PrepPipeline</span><span class="p">(</span><span class="n">raw_eeg_copy</span><span class="p">,</span> <span class="n">prep_params</span><span class="p">,</span> <span class="n">montage</span><span class="p">)</span>
+        <span class="n">prep</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+        <span class="n">raw_eeg</span> <span class="o">=</span> <span class="n">prep</span><span class="o">.</span><span class="n">raw</span>
+    <span class="k">if</span> <span class="n">report_fName</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fig_raw</span> <span class="o">=</span> <span class="n">raw_eeg</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scalings</span><span class="o">=</span><span class="mf">4e-5</span><span class="p">,</span><span class="n">n_channels</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span><span class="n">duration</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+        <span class="n">fig_raw_psd</span> <span class="o">=</span> <span class="n">raw_eeg</span><span class="o">.</span><span class="n">plot_psd</span><span class="p">()</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">add_figs_to_section</span><span class="p">(</span><span class="n">fig_raw</span><span class="p">,</span> <span class="n">captions</span><span class="o">=</span><span class="s1">&#39;prep signal space&#39;</span><span class="p">,</span> <span class="n">section</span><span class="o">=</span><span class="s1">&#39;prep&#39;</span><span class="p">)</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">add_figs_to_section</span><span class="p">(</span><span class="n">fig_raw_psd</span><span class="p">,</span> <span class="n">captions</span><span class="o">=</span><span class="s1">&#39;prep_psd&#39;</span><span class="p">,</span> <span class="n">section</span><span class="o">=</span><span class="s1">&#39;prep&#39;</span><span class="p">)</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">add_htmls_to_section</span><span class="p">(</span><span class="n">htmls</span> <span class="o">=</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">prep</span><span class="o">.</span><span class="n">interpolated_channels</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">prep</span><span class="o">.</span><span class="n">noisy_channels_original</span><span class="p">[</span><span class="s1">&#39;bad_all&#39;</span><span class="p">])</span>
+                                            <span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">prep</span><span class="o">.</span><span class="n">still_noisy_channels</span><span class="p">)],</span>
+                                    <span class="n">captions</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;interpolated channels&#39;</span><span class="p">,</span><span class="s1">&#39;bad channels detected&#39;</span><span class="p">,</span> <span class="s2">&quot;still noisy channels&quot;</span><span class="p">],</span> 
+                                    <span class="n">section</span><span class="o">=</span><span class="s1">&#39;prep&#39;</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">report_fname_2check</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">report_fname_editable</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+
+    <span class="n">eeg_len</span> <span class="o">=</span> <span class="n">raw_eeg</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">emg_df</span> <span class="o">=</span> <span class="n">emg_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">round</span><span class="p">(</span><span class="n">emg_freq</span><span class="o">/</span><span class="n">raw_eeg</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;sfreq&quot;</span><span class="p">])</span><span class="o">*</span> <span class="n">eeg_len</span><span class="p">]</span>
+    <span class="n">ch_types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;emg&#39;</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">emg_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+    <span class="n">ch_names</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">emg_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)):</span>
+        <span class="n">ch_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;emg&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">create_info</span><span class="p">(</span><span class="n">ch_names</span><span class="o">=</span><span class="n">ch_names</span><span class="p">,</span> <span class="n">sfreq</span><span class="o">=</span><span class="n">emg_freq</span><span class="p">,</span> <span class="n">ch_types</span><span class="o">=</span><span class="n">ch_types</span><span class="p">)</span>
+    <span class="n">raw_emg</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">RawArray</span><span class="p">(</span><span class="n">emg_df</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span>
+    <span class="n">raw_emg</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">sfreq</span><span class="o">=</span><span class="n">sfreq_final</span><span class="p">)</span>
+    <span class="n">raw_emg</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;highpass&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fir</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">raw_hybrid</span> <span class="o">=</span> <span class="n">raw_eeg</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">add_channels</span><span class="p">([</span><span class="n">raw_emg</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">raw_hybrid</span></div>
+
+<div class="viewcode-block" id="epochs_basedon_emg"><a class="viewcode-back" href="../../prep.html#cmgraph.prep.epochs_basedon_emg">[docs]</a><span class="k">def</span> <span class="nf">epochs_basedon_emg</span><span class="p">(</span><span class="n">raw_hybrid</span><span class="p">,</span> <span class="n">ref_emg</span><span class="p">,</span> <span class="n">windowLen</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">threshold</span> <span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">report_fName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                       <span class="n">add_to_existed_report</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">reject_criteria</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">eeg</span><span class="o">=</span><span class="mf">30e-5</span><span class="p">,</span><span class="n">emg</span><span class="o">=</span><span class="mf">1e10</span><span class="p">),</span>
+                       <span class="n">flat_criteria</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">eeg</span><span class="o">=</span><span class="mf">5e-7</span><span class="p">),</span><span class="n">tmin</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">tmax</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span> <span class="n">save_fName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    this function takes .set format for eeg and txt format for emg.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    -----------</span>
+<span class="sd">    raw_hybrid: mne raw object </span>
+<span class="sd">        The raw object containing aligned eeg and emg</span>
+<span class="sd">    ref_emg: list of string </span>
+<span class="sd">        the emg channels that the algorithm refers to. They should be channels in input raw_hybrid. The algorithm will </span>
+<span class="sd">        consider  &#39;the length of the string&#39; as number of movements. </span>
+<span class="sd">    report_fName: string</span>
+<span class="sd">        optional, default to None which will not generate a report for the epoching result.</span>
+<span class="sd">        When reproty_fName is specified, two reports will be generated at the suggested directory including one in HTML,</span>
+<span class="sd">        and one in .h5 format. The .h5 format is an edittable report.</span>
+<span class="sd">    add_to_existed_report: boolean</span>
+<span class="sd">        It is supposed to be true when one wants to add the epoching report into an existed report.</span>
+<span class="sd">    windowLen: int</span>
+<span class="sd">        rough duration estimation of the movement</span>
+<span class="sd">    step: int</span>
+<span class="sd">        equivalent to resolution, defaults to 100</span>
+<span class="sd">    threshold: float</span>
+<span class="sd">        the threshold should be in [0,1], represnting the quantile of the energy for all windows</span>
+<span class="sd">    reject_criteria: dict</span>
+<span class="sd">        epochs containing eeg and emg that exceed rejection criteria will be rejected. defaults to dict(eeg=30e-5,emg=1e10)</span>
+<span class="sd">    flat_criteria: dict</span>
+<span class="sd">         epochs containing eeg and emg whose amplitude are lower than flat criteria will be rejected.</span>
+<span class="sd">         Defaults to dict(eeg=1e-6). If reject_criteria and flat_criteria are both set to None, then no epochs rejection </span>
+<span class="sd">         would take place</span>
+<span class="sd">    tmin: float</span>
+<span class="sd">        the begining of the epochs with respect to the movement onsets</span>
+<span class="sd">    tmax: float</span>
+<span class="sd">        the end of the epochs with respect to the movement onsets</span>
+<span class="sd">    savefName: string</span>
+<span class="sd">        the path and filename of the saving epochs. It defaults to None, that is the epochs would not be saved </span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    ---------</span>
+<span class="sd">    </span>
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    eeg_emg_alignment</span>
+
+<span class="sd">    Warnings</span>
+<span class="sd">    --------</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span> <span class="nn">mne</span>
+    <span class="n">onsets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+    <span class="n">descriptions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ref_emg</span><span class="p">)):</span>
+        <span class="n">raw2cut</span> <span class="o">=</span> <span class="n">raw_hybrid</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">raw2cut</span> <span class="o">=</span> <span class="n">raw2cut</span><span class="o">.</span><span class="n">pick_channels</span><span class="p">([</span><span class="n">ref_emg</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">raw2cut</span><span class="o">.</span><span class="n">to_data_frame</span><span class="p">()[</span><span class="n">ref_emg</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span>
+        <span class="n">emgEnergy</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">windowLen</span><span class="p">,</span> <span class="n">win_type</span><span class="o">=</span><span class="s1">&#39;boxcar&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[::</span><span class="n">step</span><span class="p">]</span>
+        <span class="n">possibleOnsets</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">emgEnergy</span><span class="p">[</span><span class="n">emgEnergy</span><span class="o">&gt;</span><span class="n">emgEnergy</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">threshold</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span><span class="o">-</span><span class="n">windowLen</span>
+        <span class="n">newOnsets</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">firstOnsetD</span><span class="p">(</span><span class="n">possibleOnsets</span><span class="p">))</span><span class="o">/</span><span class="mi">1000</span> <span class="c1"># convect to seconds</span>
+        <span class="n">onsets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">onsets</span><span class="p">,</span><span class="n">newOnsets</span><span class="p">))</span>
+        <span class="n">descriptions</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span> <span class="n">descriptions</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;movement&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;Onset&#39;</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">newOnsets</span><span class="p">)))</span>
+    <span class="n">durations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">onsets</span><span class="p">)</span>
+    <span class="n">annot</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">Annotations</span><span class="p">(</span><span class="n">onset</span><span class="o">=</span><span class="n">onsets</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="n">durations</span><span class="p">,</span>
+                                        <span class="n">description</span><span class="o">=</span><span class="n">descriptions</span><span class="p">,</span>
+                                        <span class="n">orig_time</span><span class="o">=</span><span class="n">raw2cut</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;meas_date&#39;</span><span class="p">])</span>
+    <span class="c1">#change to raw2cut see effetcs</span>
+    <span class="n">raw_validate</span> <span class="o">=</span> <span class="n">raw_hybrid</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">raw_validate</span><span class="o">.</span><span class="n">set_annotations</span><span class="p">(</span><span class="n">annot</span><span class="p">)</span>
+    <span class="n">events</span><span class="p">,</span><span class="n">events_id</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">events_from_annotations</span> <span class="p">(</span><span class="n">raw_validate</span><span class="p">)</span>
+    <span class="c1"># Here we simply thresholding the epochs to get rid of noisy segment characterized by huge fluctuation.</span>
+    <span class="k">if</span> <span class="n">reject_criteria</span> <span class="o">==</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">flat_criteria</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
+        <span class="n">epochs</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">Epochs</span><span class="p">(</span><span class="n">raw_validate</span><span class="p">,</span><span class="n">events</span><span class="p">,</span><span class="n">tmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">tmax</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span><span class="n">baseline</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">epochs</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">Epochs</span><span class="p">(</span><span class="n">raw_validate</span><span class="p">,</span><span class="n">events</span><span class="p">,</span><span class="n">tmin</span><span class="o">=</span><span class="n">tmin</span><span class="p">,</span><span class="n">reject</span><span class="o">=</span><span class="n">reject_criteria</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="n">flat_criteria</span><span class="p">,</span><span class="n">tmax</span><span class="o">=</span><span class="n">tmax</span><span class="p">,</span>
+                            <span class="n">baseline</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">save_fName</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
+        <span class="n">epochs</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">save_fName</span><span class="p">,</span><span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">epochs</span></div>
+
+<div class="viewcode-block" id="firstOnsetD"><a class="viewcode-back" href="../../prep.html#cmgraph.prep.firstOnsetD">[docs]</a><span class="k">def</span> <span class="nf">firstOnsetD</span><span class="p">(</span><span class="n">possibleOnsets</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    qn auxilary function that identify true movement onsets for all the possible onsets </span>
+<span class="sd">    dentified based on energy threshold</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    possibleOnsets: list</span>
+<span class="sd">        list of all the possible onsets</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    true movement onsets</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    ---------</span>
+<span class="sd">    </span>
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    eeg_emg_alignment</span>
+
+<span class="sd">    Warnings</span>
+<span class="sd">    --------</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">possibleOnsets</span><span class="p">)</span>
+    <span class="n">st_idx</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">onsets</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">st_idx</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">st_idx</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">dif</span> <span class="o">=</span> <span class="n">possibleOnsets</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">-</span> <span class="n">possibleOnsets</span><span class="p">[</span><span class="n">st_idx</span><span class="p">]</span>
+        <span class="k">while</span> <span class="n">end</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">possibleOnsets</span><span class="p">[</span><span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">possibleOnsets</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">==</span> <span class="n">dif</span><span class="p">:</span>
+            <span class="n">end</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">onsets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">possibleOnsets</span><span class="p">[</span><span class="n">st_idx</span><span class="p">])</span>
+        <span class="n">st_idx</span> <span class="o">=</span> <span class="n">end</span><span class="o">+</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">onsets</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">CM-graph</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../prep.html">prep</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Gansheng TAN.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
