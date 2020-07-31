@@ -1,24 +1,22 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>prep &#8212; CM-graph 0.1 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="CM-graph documentation!" href="index.html" /> 
+    <link rel="prev" title="&lt;no title&gt;" href="examples/index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -30,7 +28,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="index.html" title="CM-graph documentation!"
+          <a href="examples/index.html" title="&lt;no title&gt;"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CM-graph 0.1 documentation</a> &#187;</li> 
       </ul>
@@ -44,51 +42,38 @@
   <span class="target" id="module-cmgraph.prep"></span><div class="section" id="prep">
 <h1>prep<a class="headerlink" href="#prep" title="Permalink to this headline">¶</a></h1>
 <p>A module for io and preprocessing</p>
-<dl class="function">
+<dl class="py function">
 <dt id="cmgraph.prep.eeg_emg_alignment">
-<code class="descclassname">cmgraph.prep.</code><code class="descname">eeg_emg_alignment</code><span class="sig-paren">(</span><em>eeg_fName, emg_df, sfreq_final, emg_freq, report_fName=None, start_marker=True, fir=[1, None], PREP=True, montage='standard_1020'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cmgraph/prep.html#eeg_emg_alignment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cmgraph.prep.eeg_emg_alignment" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">cmgraph.prep.</code><code class="sig-name descname">eeg_emg_alignment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">eeg_fName</span></em>, <em class="sig-param"><span class="n">emg_df</span></em>, <em class="sig-param"><span class="n">sfreq_final</span></em>, <em class="sig-param"><span class="n">emg_freq</span></em>, <em class="sig-param"><span class="n">report_fName</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">start_marker</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fir</span><span class="o">=</span><span class="default_value">[1, None]</span></em>, <em class="sig-param"><span class="n">PREP</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">montage</span><span class="o">=</span><span class="default_value">'standard_1020'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cmgraph/prep.html#eeg_emg_alignment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cmgraph.prep.eeg_emg_alignment" title="Permalink to this definition">¶</a></dt>
 <dd><p>this function takes .set format for eeg and txt format for emg.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>eeg_fName</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
-<dd><p class="first last">eeg_fName should be in .set form</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>eeg_fName</strong><span class="classifier">string</span></dt><dd><p>eeg_fName should be in .set form</p>
 </dd>
-<dt><strong>emg_fName</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
-<dd><p class="first last">emg_fName should be in .txt form</p>
+<dt><strong>emg_fName</strong><span class="classifier">string</span></dt><dd><p>emg_fName should be in .txt form</p>
 </dd>
-<dt><strong>report_fName: string</strong></dt>
-<dd><p class="first last">optional, default to None which will not generate a report for the reprocessing result. When reproty_fName is specified, two reports will be generated at the suggested directory including one in HTML,
+<dt><strong>report_fName: string</strong></dt><dd><p>optional, default to None which will not generate a report for the reprocessing result. When reproty_fName is specified, two reports will be generated at the suggested directory including one in HTML,
 and one in .h5 format. The .h5 format is an edittable report.</p>
 </dd>
-<dt><strong>montage: string</strong></dt>
-<dd><p class="first last">The defaut montage is set to standard 1020 montage</p>
+<dt><strong>montage: string</strong></dt><dd><p>The defaut montage is set to standard 1020 montage</p>
 </dd>
-<dt><strong>start_marker</strong> <span class="classifier-delimiter">:</span> <span class="classifier">boolean</span></dt>
-<dd><p class="first last">if start_marker is true, the segment before the first marker will be cropped, defaults to True</p>
+<dt><strong>start_marker</strong><span class="classifier">boolean</span></dt><dd><p>if start_marker is true, the segment before the first marker will be cropped, defaults to True</p>
 </dd>
-<dt><strong>fir: list</strong></dt>
-<dd><p class="first last">the lower and upper boundary of filter. If the boundary is set to None, then the filter become high-pass or low-pass filter.</p>
+<dt><strong>fir: list</strong></dt><dd><p>the lower and upper boundary of filter. If the boundary is set to None, then the filter become high-pass or low-pass filter.</p>
 </dd>
-<dt><strong>PREP: boolean</strong></dt>
-<dd><p class="first last">the EEG preprocessing pipeline process, defauts to True. It can de deactivated when set to false.</p>
+<dt><strong>PREP: boolean</strong></dt><dd><p>the EEG preprocessing pipeline process, defauts to True. It can de deactivated when set to false.</p>
 </dd>
-<dt><strong>emg_chs_selected</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of int</span></dt>
-<dd><p class="first last">the index of emg channels (columns) that are supposed to be used in further analysis, defaults to ‘all’</p>
+<dt><strong>emg_chs_selected</strong><span class="classifier">list of int</span></dt><dd><p>the index of emg channels (columns) that are supposed to be used in further analysis, defaults to ‘all’</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>mne raw object containing aligned eeg and emg data</strong></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>mne raw object containing aligned eeg and emg data</dt><dd></dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <p class="rubric">Notes</p>
 <p>Make sure the eeg recording are no less than the emg recording. The current version of this function crop emg signal
 with respect to emg in order to keep these data aligned.</p>
@@ -97,42 +82,34 @@ with respect to emg in order to keep these data aligned.</p>
 &gt;&gt;&gt;emg_fName = r’D:DataRuiJinFirstStroke11JanEMGsubj1_healthy_session1.txt’
 &gt;&gt;&gt;emg_df = pd.read_csv(emg_fName, header = None, skiprows=3,</p>
 <blockquote>
-<div>sep = ‘ ‘,engine = ‘python’)</div></blockquote>
+<div><p>sep = ‘ ‘,engine = ‘python’)</p>
+</div></blockquote>
 <p>&gt;&gt;&gt;eeg_emg_alignment(eeg_fName,emg_df,emg_freq=1000,sfreq_final=500,report_fName=None,PREP=False)</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cmgraph.prep.emg_io">
-<code class="descclassname">cmgraph.prep.</code><code class="descname">emg_io</code><span class="sig-paren">(</span><em>emg_fName</em>, <em>skiprows</em>, <em>sep=' '</em>, <em>emg_chs_selected='all'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cmgraph/prep.html#emg_io"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cmgraph.prep.emg_io" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">cmgraph.prep.</code><code class="sig-name descname">emg_io</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">emg_fName</span></em>, <em class="sig-param"><span class="n">skiprows</span></em>, <em class="sig-param"><span class="n">sep</span><span class="o">=</span><span class="default_value">' '</span></em>, <em class="sig-param"><span class="n">emg_chs_selected</span><span class="o">=</span><span class="default_value">'all'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cmgraph/prep.html#emg_io"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cmgraph.prep.emg_io" title="Permalink to this definition">¶</a></dt>
 <dd><p>this function takes .txt format emg file and renders to a pandas dataframe for further processing.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>emg_fName</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
-<dd><p class="first last">emg_fName should be in .txt or in .csv form.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>emg_fName</strong><span class="classifier">string</span></dt><dd><p>emg_fName should be in .txt or in .csv form.</p>
 </dd>
-<dt><strong>emg_chs_selected</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of int</span></dt>
-<dd><p class="first last">the index of emg channels (columns) that are supposed to be used in further analysis, defaults to ‘all’</p>
+<dt><strong>emg_chs_selected</strong><span class="classifier">list of int</span></dt><dd><p>the index of emg channels (columns) that are supposed to be used in further analysis, defaults to ‘all’</p>
 </dd>
-<dt><strong>sep</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
-<dd><p class="first last">the seperator to be specified when reading the txt file with pandas.read_csv</p>
+<dt><strong>sep</strong><span class="classifier">string</span></dt><dd><p>the seperator to be specified when reading the txt file with pandas.read_csv</p>
 </dd>
-<dt><strong>skiprows</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
-<dd><p class="first last">rows to be skipped. This applies for data containing emg information at the begining of the data file.</p>
+<dt><strong>skiprows</strong><span class="classifier">int</span></dt><dd><p>rows to be skipped. This applies for data containing emg information at the begining of the data file.</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>pandas’s dataframe</strong></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>pandas’s dataframe</dt><dd></dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <p class="rubric">Notes</p>
 <p>The .txt file or .csv file should not have headers. If so, please use skiprow to trim them. The first column should be 0 in the emg_chs_selected parameter</p>
 <p class="rubric">Examples</p>
@@ -140,99 +117,80 @@ with respect to emg in order to keep these data aligned.</p>
 &gt;&gt;&gt;emg_io(emg_fName, skiprows = 3, emg_chs_selected=’all’)</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cmgraph.prep.epochs_basedon_emg">
-<code class="descclassname">cmgraph.prep.</code><code class="descname">epochs_basedon_emg</code><span class="sig-paren">(</span><em>raw_hybrid</em>, <em>ref_emg</em>, <em>windowLen</em>, <em>step=100</em>, <em>threshold=0.5</em>, <em>report_fName=None</em>, <em>add_to_existed_report=False</em>, <em>reject_criteria={'eeg': 0.0003</em>, <em>'emg': 10000000000.0}</em>, <em>flat_criteria={'eeg': 5e-07}</em>, <em>tmin=0.0</em>, <em>tmax=3.0</em>, <em>save_fName=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cmgraph/prep.html#epochs_basedon_emg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cmgraph.prep.epochs_basedon_emg" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">cmgraph.prep.</code><code class="sig-name descname">epochs_basedon_emg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">raw_hybrid</span></em>, <em class="sig-param"><span class="n">ref_emg</span></em>, <em class="sig-param"><span class="n">windowLen</span></em>, <em class="sig-param"><span class="n">step</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">threshold</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">report_fName</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">add_to_existed_report</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">reject_criteria</span><span class="o">=</span><span class="default_value">{'eeg': 0.0003, 'emg': 10000000000.0}</span></em>, <em class="sig-param"><span class="n">flat_criteria</span><span class="o">=</span><span class="default_value">{'eeg': 5e-07}</span></em>, <em class="sig-param"><span class="n">tmin</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">tmax</span><span class="o">=</span><span class="default_value">3.0</span></em>, <em class="sig-param"><span class="n">save_fName</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cmgraph/prep.html#epochs_basedon_emg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cmgraph.prep.epochs_basedon_emg" title="Permalink to this definition">¶</a></dt>
 <dd><p>this function takes .set format for eeg and txt format for emg.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>raw_hybrid: mne raw object</strong></dt>
-<dd><p class="first last">The raw object containing aligned eeg and emg</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>raw_hybrid: mne raw object</strong></dt><dd><p>The raw object containing aligned eeg and emg</p>
 </dd>
-<dt><strong>ref_emg: list of string</strong></dt>
-<dd><p class="first last">the emg channels that the algorithm refers to. They should be channels in input raw_hybrid. The algorithm will 
+<dt><strong>ref_emg: list of string</strong></dt><dd><p>the emg channels that the algorithm refers to. They should be channels in input raw_hybrid. The algorithm will 
 consider  ‘the length of the string’ as number of movements.</p>
 </dd>
-<dt><strong>report_fName: string</strong></dt>
-<dd><p class="first last">optional, default to None which will not generate a report for the epoching result.
+<dt><strong>report_fName: string</strong></dt><dd><p>optional, default to None which will not generate a report for the epoching result.
 When reproty_fName is specified, two reports will be generated at the suggested directory including one in HTML,
 and one in .h5 format. The .h5 format is an edittable report.</p>
 </dd>
-<dt><strong>add_to_existed_report: boolean</strong></dt>
-<dd><p class="first last">It is supposed to be true when one wants to add the epoching report into an existed report.</p>
+<dt><strong>add_to_existed_report: boolean</strong></dt><dd><p>It is supposed to be true when one wants to add the epoching report into an existed report.</p>
 </dd>
-<dt><strong>windowLen: int</strong></dt>
-<dd><p class="first last">rough duration estimation of the movement</p>
+<dt><strong>windowLen: int</strong></dt><dd><p>rough duration estimation of the movement</p>
 </dd>
-<dt><strong>step: int</strong></dt>
-<dd><p class="first last">equivalent to resolution, defaults to 100</p>
+<dt><strong>step: int</strong></dt><dd><p>equivalent to resolution, defaults to 100</p>
 </dd>
-<dt><strong>threshold: float</strong></dt>
-<dd><p class="first last">the threshold should be in [0,1], represnting the quantile of the energy for all windows</p>
+<dt><strong>threshold: float</strong></dt><dd><p>the threshold should be in [0,1], represnting the quantile of the energy for all windows</p>
 </dd>
-<dt><strong>reject_criteria: dict</strong></dt>
-<dd><p class="first last">epochs containing eeg and emg that exceed rejection criteria will be rejected. defaults to dict(eeg=30e-5,emg=1e10)</p>
+<dt><strong>reject_criteria: dict</strong></dt><dd><p>epochs containing eeg and emg that exceed rejection criteria will be rejected. defaults to dict(eeg=30e-5,emg=1e10)</p>
 </dd>
-<dt><strong>flat_criteria: dict</strong></dt>
-<dd><p class="first last">epochs containing eeg and emg whose amplitude are lower than flat criteria will be rejected.
+<dt><strong>flat_criteria: dict</strong></dt><dd><p>epochs containing eeg and emg whose amplitude are lower than flat criteria will be rejected.
 Defaults to dict(eeg=1e-6). If reject_criteria and flat_criteria are both set to None, then no epochs rejection 
 would take place</p>
 </dd>
-<dt><strong>tmin: float</strong></dt>
-<dd><p class="first last">the begining of the epochs with respect to the movement onsets</p>
+<dt><strong>tmin: float</strong></dt><dd><p>the begining of the epochs with respect to the movement onsets</p>
 </dd>
-<dt><strong>tmax: float</strong></dt>
-<dd><p class="first last">the end of the epochs with respect to the movement onsets</p>
+<dt><strong>tmax: float</strong></dt><dd><p>the end of the epochs with respect to the movement onsets</p>
 </dd>
-<dt><strong>savefName: string</strong></dt>
-<dd><p class="first last">the path and filename of the saving epochs. It defaults to None, that is the epochs would not be saved</p>
+<dt><strong>savefName: string</strong></dt><dd><p>the path and filename of the saving epochs. It defaults to None, that is the epochs would not be saved</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>mne epochs</strong></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>mne epochs</dt><dd></dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#cmgraph.prep.eeg_emg_alignment" title="cmgraph.prep.eeg_emg_alignment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eeg_emg_alignment</span></code></a></p>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#cmgraph.prep.eeg_emg_alignment" title="cmgraph.prep.eeg_emg_alignment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eeg_emg_alignment</span></code></a></dt><dd></dd>
+</dl>
 </div>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cmgraph.prep.firstOnsetD">
-<code class="descclassname">cmgraph.prep.</code><code class="descname">firstOnsetD</code><span class="sig-paren">(</span><em>possibleOnsets</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cmgraph/prep.html#firstOnsetD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cmgraph.prep.firstOnsetD" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">cmgraph.prep.</code><code class="sig-name descname">firstOnsetD</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">possibleOnsets</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cmgraph/prep.html#firstOnsetD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cmgraph.prep.firstOnsetD" title="Permalink to this definition">¶</a></dt>
 <dd><p>an auxilary function that identify true movement onsets for all the possible onsets identified based on energy threshold.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>possibleOnsets: list</strong></dt>
-<dd><p class="first last">list of all the possible onsets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>possibleOnsets: list</strong></dt><dd><p>list of all the possible onsets</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>true movement onsets</strong></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>true movement onsets</dt><dd></dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#cmgraph.prep.eeg_emg_alignment" title="cmgraph.prep.eeg_emg_alignment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eeg_emg_alignment</span></code></a></p>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#cmgraph.prep.eeg_emg_alignment" title="cmgraph.prep.eeg_emg_alignment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eeg_emg_alignment</span></code></a></dt><dd></dd>
+</dl>
 </div>
 </dd></dl>
 
@@ -245,8 +203,8 @@ would take place</p>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">CM-graph documentation!</a></p>
+  <p class="topless"><a href="examples/index.html"
+                        title="previous chapter">&lt;no title&gt;</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -255,17 +213,15 @@ would take place</p>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -280,14 +236,14 @@ would take place</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="index.html" title="CM-graph documentation!"
+          <a href="examples/index.html" title="&lt;no title&gt;"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CM-graph 0.1 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Gansheng TAN.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.
     </div>
   </body>
 </html>
