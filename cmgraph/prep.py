@@ -73,7 +73,7 @@ def eeg_emg_alignment(eeg_fName, emg_df, sfreq_final, emg_freq, report_fName = N
         the EEG preprocessing pipeline process, defauts to True. It can de deactivated when set to false.
     emg_chs_selected : list of int
         the index of emg channels (columns) that are supposed to be used in further analysis, defaults to 'all'
-    
+        
     Returns
     -------
     mne raw object containing aligned eeg and emg data
@@ -199,6 +199,7 @@ def epochs_basedon_emg(raw_hybrid, ref_emg, windowLen, step=100, threshold =0.5,
         
     Returns
     -------
+    mne epochs
     
     Examples
     ---------
@@ -248,8 +249,8 @@ def epochs_basedon_emg(raw_hybrid, ref_emg, windowLen, step=100, threshold =0.5,
 
 def firstOnsetD(possibleOnsets):
     """
-    qn auxilary function that identify true movement onsets for all the possible onsets 
-    dentified based on energy threshold
+    an auxilary function that identify true movement onsets for all the possible onsets identified based on energy threshold.
+    
     Parameters
     ----------
     possibleOnsets: list

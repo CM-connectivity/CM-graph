@@ -10,6 +10,10 @@ CM-graph documentation!
    :maxdepth: 2
    :caption: Contents:
    
+   introduction
+   authors
+   installation
+   examples/index
    prep
 
 
