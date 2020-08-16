@@ -4,7 +4,9 @@ Introduction
 ============
 
 .. hint::
-   If you would like to contribute or share your insight about multichannel brain-muscle graph analysis, join us by contacting Gansheng TAN and upload your codes ('see the contributing advice <https://github.com/GanshengT/CM-graph>`_).
+   If you would like to contribute or share your insight about multichannel brain-muscle graph analysis, join us by contacting Gansheng TAN and upload your codes (see the contributing advices_).
+   
+.. _advices: https://github.com/GanshengT/CM-graph/
    
 1. To start with
 -----------------

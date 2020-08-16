@@ -1,0 +1,8 @@
+contraction_type,sessionIdx,EEG,EMG
+iMC,s01,1472,1
+iMC,s02,783,1
+iVC,s01,4414,2
+iVC,s02,5454,1
+iVC,s03,4688,2
+iVC,s04,4627,2
+iVC,s05,4404,1

@@ -1,15 +1,13 @@
 """
 prep
 ==============
-
 A module for io and preprocessing
-
 """
 
-def emg_io(emg_fName, skiprows, sep = ' ', emg_chs_selected='all'):
+def emg_io(emg_fName, skiprows, sep = ' ', emg_chs_selected='all'):    
     
     """
-    this function takes .txt format emg file and renders to a pandas dataframe for further processing.
+    this function takes .txt format emg file and renders to a pandas dataframe for further processing.    
     
     Parameters
     -----------
@@ -41,6 +39,7 @@ def emg_io(emg_fName, skiprows, sep = ' ', emg_chs_selected='all'):
     --------
     The .txt file or .csv file should not have headers. If so, please use skiprow to trim them. The first column should be 0 in the emg_chs_selected parameter
     """
+    
     import pandas as pd  
     emg_data = pd.read_csv(emg_fName, header = None, skiprows=skiprows, sep = sep, engine = 'python')
     if emg_chs_selected == 'all':
@@ -49,10 +48,10 @@ def emg_io(emg_fName, skiprows, sep = ' ', emg_chs_selected='all'):
         emg_data = emg_data[emg_chs_selected]
     return emg_data
     
-def eeg_emg_alignment(eeg_fName, emg_df, sfreq_final, emg_freq, report_fName = None, start_marker = True, fir=[1,None], PREP=True,
-                       montage = 'standard_1020'):
+def eeg_emg_alignment(eeg_fName, emg_df, sfreq_final, emg_freq, report_fName = None, start_marker = True, fir=[1,None], PREP=True,montage = 'standard_1020'):   
+    
     """
-    this function takes .set format for eeg and txt format for emg.
+    This function takes .set format for eeg and txt format for emg.
     
     Parameters
     -----------
@@ -162,6 +161,7 @@ def eeg_emg_alignment(eeg_fName, emg_df, sfreq_final, emg_freq, report_fName = N
 def epochs_basedon_emg(raw_hybrid, ref_emg, windowLen, step=100, threshold =0.5,report_fName=None, 
                        add_to_existed_report=False, reject_criteria = dict(eeg=30e-5,emg=1e10),
                        flat_criteria = dict(eeg=5e-7),tmin = 0.0, tmax = 3.0, save_fName=None):
+    
     """
     this function takes .set format for eeg and txt format for emg.
     
@@ -213,8 +213,8 @@ def epochs_basedon_emg(raw_hybrid, ref_emg, windowLen, step=100, threshold =0.5,
     
     Notes
     --------
-
     """
+    
     import numpy as np
     import mne
     onsets = np.array([])
@@ -248,6 +248,7 @@ def epochs_basedon_emg(raw_hybrid, ref_emg, windowLen, step=100, threshold =0.5,
     return epochs
 
 def firstOnsetD(possibleOnsets):
+    
     """
     an auxilary function that identify true movement onsets for all the possible onsets identified based on energy threshold.
     
@@ -272,8 +273,8 @@ def firstOnsetD(possibleOnsets):
     
     Notes
     --------
-
     """
+    
     n=len(possibleOnsets)
     st_idx = 0
     onsets = []

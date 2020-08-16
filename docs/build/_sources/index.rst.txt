@@ -10,11 +10,16 @@ CM-graph documentation!
    :maxdepth: 2
    :caption: Contents:
    
-   introduction
    authors
-   installation
+   introduction
    examples/index
    prep
+
+.. toctree::
+  :maxdepth: 1
+  :caption: Getting Started
+
+  Examples Gallery <gallery/index>
 
 
 

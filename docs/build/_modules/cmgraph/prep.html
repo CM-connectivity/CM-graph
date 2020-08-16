@@ -4,9 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>cmgraph.prep &#8212; CM-graph 0.1 documentation</title>
+    <title>cmgraph.prep &#8212; CM-graph 0.1.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
     
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -26,7 +29,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">CM-graph 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">CM-graph 0.1.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -40,15 +43,13 @@
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">prep</span>
 <span class="sd">==============</span>
-
 <span class="sd">A module for io and preprocessing</span>
-
 <span class="sd">&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="emg_io"><a class="viewcode-back" href="../../prep.html#cmgraph.prep.emg_io">[docs]</a><span class="k">def</span> <span class="nf">emg_io</span><span class="p">(</span><span class="n">emg_fName</span><span class="p">,</span> <span class="n">skiprows</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">emg_chs_selected</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="emg_io"><a class="viewcode-back" href="../../prep.html#cmgraph.prep.emg_io">[docs]</a><span class="k">def</span> <span class="nf">emg_io</span><span class="p">(</span><span class="n">emg_fName</span><span class="p">,</span> <span class="n">skiprows</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">emg_chs_selected</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">):</span>    
     
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    this function takes .txt format emg file and renders to a pandas dataframe for further processing.</span>
+<span class="sd">    this function takes .txt format emg file and renders to a pandas dataframe for further processing.    </span>
 <span class="sd">    </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    -----------</span>
@@ -80,6 +81,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    The .txt file or .csv file should not have headers. If so, please use skiprow to trim them. The first column should be 0 in the emg_chs_selected parameter</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    
     <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>  
     <span class="n">emg_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">emg_fName</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="n">skiprows</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="n">sep</span><span class="p">,</span> <span class="n">engine</span> <span class="o">=</span> <span class="s1">&#39;python&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">emg_chs_selected</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span>
@@ -88,10 +90,10 @@
         <span class="n">emg_data</span> <span class="o">=</span> <span class="n">emg_data</span><span class="p">[</span><span class="n">emg_chs_selected</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">emg_data</span></div>
     
-<div class="viewcode-block" id="eeg_emg_alignment"><a class="viewcode-back" href="../../prep.html#cmgraph.prep.eeg_emg_alignment">[docs]</a><span class="k">def</span> <span class="nf">eeg_emg_alignment</span><span class="p">(</span><span class="n">eeg_fName</span><span class="p">,</span> <span class="n">emg_df</span><span class="p">,</span> <span class="n">sfreq_final</span><span class="p">,</span> <span class="n">emg_freq</span><span class="p">,</span> <span class="n">report_fName</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_marker</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">fir</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span> <span class="n">PREP</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                       <span class="n">montage</span> <span class="o">=</span> <span class="s1">&#39;standard_1020&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="eeg_emg_alignment"><a class="viewcode-back" href="../../prep.html#cmgraph.prep.eeg_emg_alignment">[docs]</a><span class="k">def</span> <span class="nf">eeg_emg_alignment</span><span class="p">(</span><span class="n">eeg_fName</span><span class="p">,</span> <span class="n">emg_df</span><span class="p">,</span> <span class="n">sfreq_final</span><span class="p">,</span> <span class="n">emg_freq</span><span class="p">,</span> <span class="n">report_fName</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_marker</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">fir</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span> <span class="n">PREP</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">montage</span> <span class="o">=</span> <span class="s1">&#39;standard_1020&#39;</span><span class="p">):</span>   
+    
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    this function takes .set format for eeg and txt format for emg.</span>
+<span class="sd">    This function takes .set format for eeg and txt format for emg.</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    -----------</span>
@@ -201,6 +203,7 @@
 <div class="viewcode-block" id="epochs_basedon_emg"><a class="viewcode-back" href="../../prep.html#cmgraph.prep.epochs_basedon_emg">[docs]</a><span class="k">def</span> <span class="nf">epochs_basedon_emg</span><span class="p">(</span><span class="n">raw_hybrid</span><span class="p">,</span> <span class="n">ref_emg</span><span class="p">,</span> <span class="n">windowLen</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">threshold</span> <span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">report_fName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
                        <span class="n">add_to_existed_report</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">reject_criteria</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">eeg</span><span class="o">=</span><span class="mf">30e-5</span><span class="p">,</span><span class="n">emg</span><span class="o">=</span><span class="mf">1e10</span><span class="p">),</span>
                        <span class="n">flat_criteria</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">eeg</span><span class="o">=</span><span class="mf">5e-7</span><span class="p">),</span><span class="n">tmin</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">tmax</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span> <span class="n">save_fName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    this function takes .set format for eeg and txt format for emg.</span>
 <span class="sd">    </span>
@@ -252,8 +255,8 @@
 <span class="sd">    </span>
 <span class="sd">    Notes</span>
 <span class="sd">    --------</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
+    
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
     <span class="kn">import</span> <span class="nn">mne</span>
     <span class="n">onsets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
@@ -287,6 +290,7 @@
     <span class="k">return</span> <span class="n">epochs</span></div>
 
 <div class="viewcode-block" id="firstOnsetD"><a class="viewcode-back" href="../../prep.html#cmgraph.prep.firstOnsetD">[docs]</a><span class="k">def</span> <span class="nf">firstOnsetD</span><span class="p">(</span><span class="n">possibleOnsets</span><span class="p">):</span>
+    
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    an auxilary function that identify true movement onsets for all the possible onsets identified based on energy threshold.</span>
 <span class="sd">    </span>
@@ -311,8 +315,8 @@
 <span class="sd">    </span>
 <span class="sd">    Notes</span>
 <span class="sd">    --------</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
+    
     <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">possibleOnsets</span><span class="p">)</span>
     <span class="n">st_idx</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">onsets</span> <span class="o">=</span> <span class="p">[]</span>
@@ -354,7 +358,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">CM-graph 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">CM-graph 0.1.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

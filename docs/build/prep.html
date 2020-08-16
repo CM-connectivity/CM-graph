@@ -4,9 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>prep &#8212; CM-graph 0.1 documentation</title>
+    <title>prep &#8212; CM-graph 0.1.0 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="_static/gallery-dataframe.css" />
     
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -16,7 +19,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="examples/index.html" /> 
+    <link rel="next" title="Example gallery for CM-graph" href="gallery/index.html" />
+    <link rel="prev" title="Examples" href="examples/index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -28,9 +32,12 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="examples/index.html" title="&lt;no title&gt;"
+          <a href="gallery/index.html" title="Example gallery for CM-graph"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="examples/index.html" title="Examples"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">CM-graph 0.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">CM-graph 0.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -45,7 +52,7 @@
 <dl class="py function">
 <dt id="cmgraph.prep.eeg_emg_alignment">
 <code class="sig-prename descclassname">cmgraph.prep.</code><code class="sig-name descname">eeg_emg_alignment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">eeg_fName</span></em>, <em class="sig-param"><span class="n">emg_df</span></em>, <em class="sig-param"><span class="n">sfreq_final</span></em>, <em class="sig-param"><span class="n">emg_freq</span></em>, <em class="sig-param"><span class="n">report_fName</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">start_marker</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fir</span><span class="o">=</span><span class="default_value">[1, None]</span></em>, <em class="sig-param"><span class="n">PREP</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">montage</span><span class="o">=</span><span class="default_value">'standard_1020'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cmgraph/prep.html#eeg_emg_alignment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cmgraph.prep.eeg_emg_alignment" title="Permalink to this definition">¶</a></dt>
-<dd><p>this function takes .set format for eeg and txt format for emg.</p>
+<dd><p>This function takes .set format for eeg and txt format for emg.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
@@ -126,7 +133,7 @@ with respect to emg in order to keep these data aligned.</p>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>raw_hybrid: mne raw object</strong></dt><dd><p>The raw object containing aligned eeg and emg</p>
 </dd>
-<dt><strong>ref_emg: list of string</strong></dt><dd><p>the emg channels that the algorithm refers to. They should be channels in input raw_hybrid. The algorithm will 
+<dt><strong>ref_emg: list of string</strong></dt><dd><p>the emg channels that the algorithm refers to. They should be channels in input raw_hybrid. The algorithm will
 consider  ‘the length of the string’ as number of movements.</p>
 </dd>
 <dt><strong>report_fName: string</strong></dt><dd><p>optional, default to None which will not generate a report for the epoching result.
@@ -144,7 +151,7 @@ and one in .h5 format. The .h5 format is an edittable report.</p>
 <dt><strong>reject_criteria: dict</strong></dt><dd><p>epochs containing eeg and emg that exceed rejection criteria will be rejected. defaults to dict(eeg=30e-5,emg=1e10)</p>
 </dd>
 <dt><strong>flat_criteria: dict</strong></dt><dd><p>epochs containing eeg and emg whose amplitude are lower than flat criteria will be rejected.
-Defaults to dict(eeg=1e-6). If reject_criteria and flat_criteria are both set to None, then no epochs rejection 
+Defaults to dict(eeg=1e-6). If reject_criteria and flat_criteria are both set to None, then no epochs rejection
 would take place</p>
 </dd>
 <dt><strong>tmin: float</strong></dt><dd><p>the begining of the epochs with respect to the movement onsets</p>
@@ -204,7 +211,10 @@ would take place</p>
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="examples/index.html"
-                        title="previous chapter">&lt;no title&gt;</a></p>
+                        title="previous chapter">Examples</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gallery/index.html"
+                        title="next chapter">Example gallery for CM-graph</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -236,9 +246,12 @@ would take place</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="examples/index.html" title="&lt;no title&gt;"
+          <a href="gallery/index.html" title="Example gallery for CM-graph"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="examples/index.html" title="Examples"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">CM-graph 0.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">CM-graph 0.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
