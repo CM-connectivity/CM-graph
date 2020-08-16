@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Introductory example - Plotting sin &#8212; CM-graph 0.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Example gallery for CM-graph" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Example gallery for CM-graph"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CM-graph 0.1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Example gallery for CM-graph</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-gallery-unrelated-py"><span class="std std-ref">here</span></a>     to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="introductory-example-plotting-sin">
+<span id="sphx-glr-gallery-unrelated-py"></span><h1>Introductory example - Plotting sin<a class="headerlink" href="#introductory-example-plotting-sin" title="Permalink to this headline">¶</a></h1>
+<p>This is a general example demonstrating a Matplotlib plot output, embedded
+rST, the use of math notation and cross-linking to other examples. It would be
+useful to compare the <code class="xref download docutils literal notranslate"><span class="pre">source</span> <span class="pre">Python</span> <span class="pre">file</span></code> with the
+output below.
+Source files for gallery examples should start with a triple-quoted header
+docstring. Anything before the docstring is ignored by Sphinx-Gallery and will
+not appear in the rendered output, nor will it be executed. This docstring
+requires a rST header, which is used as the title of the example and
+to correctly build cross-referencing links.
+Code and embedded rST text blocks follow the docstring. The first block
+immediately after the docstring is deemed a code block, by default, unless you
+specify it to be a text block using a line of <code class="docutils literal notranslate"><span class="pre">#</span></code>’s or <code class="docutils literal notranslate"><span class="pre">#%%</span></code> (see below).
+All code blocks get executed by Sphinx-Gallery and any output, including plots
+will be captured. Typically, code and text blocks are interspersed to provide
+narrative explanations of what the code is doing or interpretations of code
+output.
+Mathematical expressions can be included as LaTeX, and will be rendered with
+MathJax. To include displayed math notation, use the directive <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">math::</span></code>.
+To include inline math notation use the <code class="docutils literal notranslate"><span class="pre">:math:</span></code> role. For example, we are
+about to plot the following function:
+.. math:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> \<span class="n">rightarrow</span> \<span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here the function <img class="math" src="../_images/math/6ccf0a8f6914b8fcaed21ae8da8216dad81807ff.png" alt="\sin"/> is evaluated at each point the variable
+<img class="math" src="../_images/math/888f7c323ac0341871e867220ae2d76467d74d6e.png" alt="x"/> is defined. When including LaTeX in a Python string, ensure that you
+escape the backslashes or use a <span class="xref std std-ref">raw docstring</span>. You do
+not need to do this in text blocks (see below).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Code source: Óscar Nájera</span>
+<span class="c1"># License: BSD 3 clause</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\sin(x)$&#39;</span><span class="p">)</span>
+<span class="c1"># To avoid matplotlib text output</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>To include embedded rST, use a line of &gt;= 20 <code class="docutils literal notranslate"><span class="pre">#</span></code>’s or <code class="docutils literal notranslate"><span class="pre">#%%</span></code> between your
+rST and your code (see <span class="xref std std-ref">embedding_rst</span>). This separates your example
+into distinct text and code blocks. You can continue writing code below the
+embedded rST text block:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This example shows a sin plot!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>LaTeX syntax in the text blocks does not require backslashes to be escaped:</p>
+<div class="math">
+<p><img src="../_images/math/a476d77c25c668c9d0b0b439bcd3cfddf9054e9c.png" alt="\sin"/></p>
+</div><div class="section" id="cross-referencing">
+<h2>Cross referencing<a class="headerlink" href="#cross-referencing" title="Permalink to this headline">¶</a></h2>
+<p>You can refer to an example from any part of the documentation,
+including from other examples. Sphinx-Gallery automatically creates reference
+labels for each example. The label consists of the <code class="docutils literal notranslate"><span class="pre">.py</span></code> file name,
+prefixed with <code class="docutils literal notranslate"><span class="pre">sphx_glr_</span></code> and the name of the
+folder(s) the example is in. In this case, the example we want to
+cross-reference is in <code class="docutils literal notranslate"><span class="pre">auto_examples</span></code> (the <code class="docutils literal notranslate"><span class="pre">gallery_dirs</span></code>; see
+<span class="xref std std-ref">configure_and_use_sphinx_gallery</span>), then the subdirectory <code class="docutils literal notranslate"><span class="pre">no_output</span></code>
+(since the example is within a sub-gallery). The file name of the example is
+<code class="docutils literal notranslate"><span class="pre">plot_syntaxerror.py</span></code>. We can thus cross-link to the example ‘SyntaxError’
+using:
+<code class="docutils literal notranslate"><span class="pre">:ref:`sphx_glr_auto_examples_no_output_plot_syntaxerror.py`</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><span class="xref std std-ref">sphx_glr_auto_examples_no_output_plot_syntaxerror.py</span> for a
+an example with an error.</p>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-unrelated-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/38bca8da5dfbce27928eb605ad81238e/unRelated.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">unRelated.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/7f2d33872b05b8d9c8bdda5552aef3b2/unRelated.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">unRelated.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introductory example - Plotting sin</a><ul>
+<li><a class="reference internal" href="#cross-referencing">Cross referencing</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Example gallery for CM-graph</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/gallery/unRelated.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Example gallery for CM-graph"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CM-graph 0.1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Example gallery for CM-graph</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Gansheng TAN.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
+  </body>
+</html>

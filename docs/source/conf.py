@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Configuration file for the Sphinx documentation builder.
+# CM-graph Configuration file for the Sphinx documentation builder.
 #
 # This file does only contain a selection of the most common options. For a
 # full list see the documentation:
@@ -24,9 +24,9 @@ copyright = '2020, Gansheng TAN'
 author = 'Gansheng TAN'
 
 # The short X.Y version
-version = ''
+version = 'v0.1'
 # The full version, including alpha/beta/rc tags
-release = '0.1'
+release = '0.1.0'
 
 # --path update----------------------------------------------------
 import os
@@ -50,6 +50,8 @@ extensions = [
     'sphinx.ext.imgmath',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
+    'sphinx.ext.napoleon',
+    'sphinx_gallery.gen_gallery'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -77,8 +79,13 @@ language = None
 exclude_patterns = []
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = None
+pygments_style = 'sphinx'
 
+# Sphinx gallery configuration
+sphinx_gallery_conf = {
+     'examples_dirs': 'examples',   # path to your example scripts
+     'gallery_dirs': 'gallery',  # path to where to save gallery generated output
+}
 
 # -- Options for HTML output -------------------------------------------------
 
