@@ -1,0 +1,17 @@
+subj_idx,affected_h,dominant_h,t_fromStrokeOnset_m
+1,l,r,0
+2,l,r,3
+3,l,r,10
+4,r,r,0
+5,l,r,0
+6,r,r,1
+7,r,r,3
+8,l,r,3
+9,r,r,3
+10,l,r,3
+11,r,r,3
+14,r,r,0
+15,r,r,0
+17,r,r,0
+18,r,r,0
+19,r,r,0
